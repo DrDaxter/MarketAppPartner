@@ -1,0 +1,12 @@
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened class="drawer-main">
+    <mat-selection-list #shoes [multiple]="false">
+      <mat-list-option *ngFor="let shoe of typesOfShoes" [value]="shoe">
+        <p>{{shoe}}</p>
+      </mat-list-option>
+    </mat-selection-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    sdfsfsdfssdfs
+  </mat-sidenav-content>
+</mat-sidenav-container>
