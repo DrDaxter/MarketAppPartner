@@ -4,8 +4,22 @@
     </mat-sidenav>
     <mat-sidenav-content>
         <app-header></app-header>
-        <main>
-            <router-outlet></router-outlet> 
-        </main>
+        <mat-sidenav-container>
+            <mat-sidenav mode="side" opened class="drawer-main">
+              <mat-selection-list #shoes [multiple]="false" *ngFor="let page of pages">
+                <mat-list-option 
+                  [value]="page.title"
+                  [routerLink]="page.url"
+                >
+                  <p>{{page.title}}</p>
+                </mat-list-option>
+              </mat-selection-list>
+            </mat-sidenav>
+            <mat-sidenav-content>
+                <main>
+                    <router-outlet></router-outlet> 
+                </main>
+            </mat-sidenav-content>
+          </mat-sidenav-container>
     </mat-sidenav-content>
 </mat-sidenav-container>
