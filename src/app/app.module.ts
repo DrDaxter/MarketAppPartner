@@ -6,6 +6,10 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+//angular fire
+import { environment } from 'src/environments/environment';
+import { provideFirebaseApp, initializeApp} from '@angular/fire/app';
+import { getFirestore,provideFirestore } from '@angular/fire/firestore'
 //material component
 import { MatSliderModule } from '@angular/material/slider';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -14,7 +18,10 @@ import { HeaderComponent } from './components/header/header.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatListModule} from '@angular/material/list';
-import { ProductsComponent } from './pages/products/products.component';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import { ProductsModule } from './pages/products/products.module';
+
 
 @NgModule({
   declarations: [
@@ -22,9 +29,10 @@ import { ProductsComponent } from './pages/products/products.component';
     LoginComponent,
     HomeComponent,
     HeaderComponent,
-    ProductsComponent
   ],
   imports: [
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideFirestore(() => getFirestore()),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -33,9 +41,14 @@ import { ProductsComponent } from './pages/products/products.component';
     MatCheckboxModule,
     MatToolbarModule,
     MatNativeDateModule,
-    MatListModule
+    MatListModule,
+    ProductsModule,
+    MatButtonModule,
+    MatIconModule
   ],
-  providers: [],
+  providers: [
+    
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

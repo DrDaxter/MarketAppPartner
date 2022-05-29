@@ -1,0 +1,24 @@
+table {
+    width: 100%;
+}
+
+#product-img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+h4{
+    font-weight: bold;
+}
+
+#edit-icon, #edit-button{
+    font-size: 40px;
+   /*  height: 40px ; */
+    width: 40px;
+}
+
+#button-add-content{
+    float: right;
+    margin: 10px;
+}

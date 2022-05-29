@@ -1,25 +1,70 @@
-<!-- <router-outlet></router-outlet> -->
 <mat-sidenav-container>
-    <mat-sidenav #sidenav role="navigation">
-    </mat-sidenav>
-    <mat-sidenav-content>
+  <mat-sidenav mode="side" [(opened)]="fullMenu" *ngIf="toggle" class="drawer-main">
+    <div class="button-content">
+      <button mat-icon-button class="btn-toggle" (click)="changeArrow('70px')">
+        <mat-icon 
+        class="icon-head"
+        aria-hidden="false" 
+        aria-label="Example edit icon"
+        >arrow_back</mat-icon>
+      </button>
+    </div><br><br>
+    <mat-selection-list #menuItem [multiple]="false" >
+      <mat-list-option 
+        *ngFor="let page of pages"
+        [value]="page.title"
+        [routerLink]="page.url"
+      >
+        <div class="items-content">
+          <div class="child1">
+            <mat-icon 
+              class="icon-submenu"
+              aria-hidden="false" 
+              aria-label="Example edit icon"
+            >{{page.icon}}</mat-icon>
+          </div>
+          <div class="child2">
+            <p>{{page.title}}</p>
+          </div>
+        </div>
+        
+      </mat-list-option>
+    </mat-selection-list>
+  </mat-sidenav>
+
+  <mat-sidenav mode="side" [(opened)]="iconToggle" *ngIf="!toggle" class="drawer-icon-main">
+    <div class="button-content">
+      <button mat-icon-button class="btn-toggle" (click)="changeArrow('200px')">
+        <mat-icon 
+        class="icon-head"
+        aria-hidden="false" 
+        aria-label="Example edit icon"
+        >arrow_forward</mat-icon>
+      </button>
+    </div><br><br>
+    <mat-selection-list #shoes [multiple]="false" >
+      <mat-list-option 
+        *ngFor="let page of pages"
+        [value]="page.title"
+        [routerLink]="page.url"
+      >
+        <mat-icon 
+          class="icon-submenu"
+          aria-hidden="false" 
+          aria-label="Example edit icon"
+        >{{page.icon}}</mat-icon>
+      </mat-list-option>
+    </mat-selection-list>
+  </mat-sidenav>
+  <mat-sidenav-content [ngStyle]="{'margin-left':default_margin}">
         <app-header></app-header>
-        <mat-sidenav-container>
-            <mat-sidenav mode="side" opened class="drawer-main">
-              <mat-selection-list #shoes [multiple]="false" *ngFor="let page of pages">
-                <mat-list-option 
-                  [value]="page.title"
-                  [routerLink]="page.url"
-                >
-                  <p>{{page.title}}</p>
-                </mat-list-option>
-              </mat-selection-list>
-            </mat-sidenav>
-            <mat-sidenav-content>
-                <main>
+        <mat-sidenav-container style="margin-left: 10px;margin-right: 10px;">
+
+            
+                <main style="padding: 10px; height: auto;">
                     <router-outlet></router-outlet> 
                 </main>
-            </mat-sidenav-content>
+            
           </mat-sidenav-container>
-    </mat-sidenav-content>
+  </mat-sidenav-content>
 </mat-sidenav-container>
