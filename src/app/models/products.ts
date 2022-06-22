@@ -5,12 +5,18 @@ export class Products{
     public symbol: string = "";
 }
 
-export interface ProductsInterface{
-    category_uid:string;
-    commerce_uid:string;
-    image:string;
-    isSale:boolean;
-    name:string;
-    uid:string;
-    price:number
+export class ProductsClass{
+    public category_uid:string = "";
+    public commerce_uid:string = "";
+    public image:string = "";
+    public isSale:boolean = false;
+    public name:string = "";
+    public description:string = "";
+    public uid:string = "";
+    public price:number = 0;
+    public category:string = "";
+}
+
+export interface categories{
+    category_name:string;
 }

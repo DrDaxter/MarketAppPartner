@@ -15,20 +15,24 @@ main{
 .drawer-main{
     background: #1f1f1f;
     top: 10%;
+    left: 15px;
     width: 200px;
     height: 85%;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
+    /* border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px; */
+    border-radius: 15px;
 }
 
 .drawer-icon-main{
+   
     background: #1f1f1f;
     top: 10%;
-  
+    left: 15px;
     width: 70px !important;
     height: 85%;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
+    /* border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px; */
+    border-radius: 15px;
 }
 
 mat-list-option[aria-selected="true"] {
@@ -52,10 +56,15 @@ p{
 
 .button-content{
     width: 100%;
-    margin-bottom: 15%;
+    margin-bottom: 7%;
     .btn-toggle{
         float: right;
     }
+}
+
+.items-sub-content{
+    position: relative;
+    top: 6px;
 }
 
 .items-content{

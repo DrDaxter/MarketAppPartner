@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { FirestoreService } from 'src/app/services/firestore/firestore.service';
-import { Products,ProductsInterface } from 'src/app/models/products';
+import { Products,ProductsClass } from 'src/app/models/products';
 import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
@@ -13,7 +13,7 @@ import { NavigationExtras, Router } from '@angular/router';
 export class ProductsComponent implements OnInit {
   dataSource:any;
   displayedColumns: string[] = ['image', 'name', 'price','edit'];
-  elementData: ProductsInterface[] = [];
+  elementData: ProductsClass[] = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   constructor(
     private firestore: FirestoreService,
@@ -21,14 +21,13 @@ export class ProductsComponent implements OnInit {
   ) {
     
    }
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
+
   ngOnInit(): void {
-    this.firestore.getAll().subscribe((res:any) => {
+    this.firestore.getOne().subscribe((res:any) => {
       console.log(res);
       this.elementData = res;
-      this.dataSource = new MatTableDataSource<ProductsInterface>(this.elementData);
+      this.dataSource = new MatTableDataSource<ProductsClass>(this.elementData);
+      this.dataSource.paginator = this.paginator;
     });
   }
 

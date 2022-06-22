@@ -1,5 +1,6 @@
-<mat-sidenav-container>
-  <mat-sidenav mode="side" [(opened)]="fullMenu" *ngIf="toggle" class="drawer-main">
+<mat-sidenav-container [@.disabled]="temporaryDisabled">
+  <mat-sidenav mode="side" [(opened)]="fullMenu" *ngIf="toggle" class="drawer-main"
+    id="side1">
     <div class="button-content">
       <button mat-icon-button class="btn-toggle" (click)="changeArrow('70px')">
         <mat-icon 
@@ -32,7 +33,8 @@
     </mat-selection-list>
   </mat-sidenav>
 
-  <mat-sidenav mode="side" [(opened)]="iconToggle" *ngIf="!toggle" class="drawer-icon-main">
+  <mat-sidenav mode="side" [(opened)]="iconToggle"  *ngIf="!toggle" class="drawer-icon-main"
+    id="side2">
     <div class="button-content">
       <button mat-icon-button class="btn-toggle" (click)="changeArrow('200px')">
         <mat-icon 
@@ -48,22 +50,23 @@
         [value]="page.title"
         [routerLink]="page.url"
       >
+      <div class="items-sub-content">
         <mat-icon 
           class="icon-submenu"
           aria-hidden="false" 
           aria-label="Example edit icon"
         >{{page.icon}}</mat-icon>
+      </div>
       </mat-list-option>
     </mat-selection-list>
   </mat-sidenav>
   <mat-sidenav-content [ngStyle]="{'margin-left':default_margin}">
         <app-header></app-header>
         <mat-sidenav-container style="margin-left: 10px;margin-right: 10px;">
-
-            
-                <main style="padding: 10px; height: auto;">
-                    <router-outlet></router-outlet> 
-                </main>
+          
+          <main style="padding: 10px; height: auto;">
+              <router-outlet></router-outlet> 
+          </main>
             
           </mat-sidenav-container>
   </mat-sidenav-content>

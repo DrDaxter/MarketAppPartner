@@ -21,7 +21,9 @@ import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { ProductsModule } from './pages/products/products.module';
-
+import {AngularFireModule,} from '@angular/fire/compat';
+import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
+//import { FirebaseStorage } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,9 @@ import { ProductsModule } from './pages/products/products.module';
   imports: [
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule.enablePersistence(),
+    
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -47,7 +52,7 @@ import { ProductsModule } from './pages/products/products.module';
     MatIconModule
   ],
   providers: [
-    
+
   ],
   bootstrap: [AppComponent]
 })
