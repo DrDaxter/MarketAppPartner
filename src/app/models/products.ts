@@ -14,9 +14,11 @@ export class ProductsClass{
     public description:string = "";
     public uid:string = "";
     public price:number = 0;
-    public category:string = "";
+    public timestamp:Date = new Date();
+    //public category:string = "";
 }
 
 export interface categories{
+    uid:string;
     category_name:string;
 }

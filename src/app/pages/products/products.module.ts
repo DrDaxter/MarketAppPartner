@@ -12,6 +12,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 
@@ -35,7 +36,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatInputModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
-    MatGridListModule
+    MatGridListModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     MatPaginator

@@ -22,6 +22,7 @@ export class ManageProductComponent implements OnInit {
   view:string = "";
   productUid:string = "";
   selectedFile:any = null;
+  showLoader:boolean = false;
   validationMessage = {
     name: [
       {type: "required", message: "Product name is required"},
@@ -91,20 +92,27 @@ export class ManageProductComponent implements OnInit {
   }
 
   saveProduct(productForm:any){
+    console.log(productForm);
+    //this.showLoader = true;
     let products:ProductsClass = productForm;
-    products.category = productForm.category.category_name;
-    
+    products.category_uid = productForm.category;
     console.log(products);
+    
+    /* console.log(products);
     this.firestoreService.addElement("product",products).then((resolve) => {
       console.log(resolve);
       if(this.selectedFile != null){
         this.firebaseStorageService.uploadImage(this.selectedFile,resolve as string).then(res => {
+          this.showLoader = false;
           console.log(res);
         });
       }else{
         console.log("No picture");
+        this.showLoader = false; 
       }
-    });
+      this.productsForm.reset();
+      this.selectedFile = null;
+    }); */
   }
 
   loadCategories(){
@@ -118,8 +126,4 @@ export class ManageProductComponent implements OnInit {
       );
     });
   }
-}
-
-export interface User {
-  name: string;
 }

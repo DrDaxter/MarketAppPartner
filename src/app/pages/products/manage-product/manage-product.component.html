@@ -8,6 +8,7 @@
       </mat-form-field>
 </div>
 <div class="content" *ngIf="view == 'add'">
+  <mat-spinner *ngIf="showLoader"></mat-spinner>
   <mat-grid-list cols="2" rowHeight="2:2">
     <mat-grid-tile>
       <mat-card class="example-card">
@@ -52,7 +53,7 @@
               <mat-label>Category</mat-label>
               <input type="text" matInput formControlName="category" [matAutocomplete]="auto">
               <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option.uid">
                   {{option.category_name}}
                   
                 </mat-option>
@@ -86,10 +87,8 @@
       </mat-card>
     </mat-grid-tile>
     <mat-grid-tile>
-      <img src="" alt="img-product" id="img-product">
+      <img src="" alt="img-product" id="img-product" width="400px" [hidden]="selectedFile == null">
+      <img src="assets/img/package.png" alt="" *ngIf="selectedFile == null" width="300px">
     </mat-grid-tile>
-  </mat-grid-list>
-
-
-  
+  </mat-grid-list>  
 </div>
