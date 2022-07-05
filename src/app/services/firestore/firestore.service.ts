@@ -23,7 +23,7 @@ export class FirestoreService {
     return collectionData(data);
   }
 
-  addElement<T>(collectionName:string,item:any){
+  addElement<T>(collectionName:string,item:any){//we use angular fire compact to be able to generate the id before save the data
     return new Promise(resolve => {
       item.uid = item.uid != null && item.uid != '' && item.uid != undefined ? item.uid : this.afs.createId();
       this.afs.doc<T>(`${collectionName}/${item.uid}`).set(item);

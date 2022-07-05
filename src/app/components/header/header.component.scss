@@ -1,14 +1,30 @@
 .toolbar{
     /* background: #1f1f1f; */
-    background: transparent !important;
+    background: #f0f0f0d7;
     color: #fff;
     padding: 10px;
+    width: 100%;
+    border: 0px;
+    background-image: linear-gradient(#f0f0f0d7,#f0f0f0d7,#f0f0f0d7, #f6f6f6);
 }
 
 span{
     position: relative;
-    left: 50%;
+    left: 5%;
 }
+
+.alerts{
+   width: 100%;
+   span{
+    left: 90%;
+   }
+}
+
 img{
-    width: 100px;
+    width: 80px;
+}
+
+.alerts-icon{
+    color: #000 !important;
+    font-size: 30px !important;
 }

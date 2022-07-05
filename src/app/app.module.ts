@@ -23,6 +23,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { ProductsModule } from './pages/products/products.module';
 import {AngularFireModule,} from '@angular/fire/compat';
 import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
+import {MatBadgeModule} from '@angular/material/badge';
 //import { FirebaseStorage } from '@angular/fire/storage';
 
 @NgModule({
@@ -49,7 +50,8 @@ import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
     MatListModule,
     ProductsModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatBadgeModule
   ],
   providers: [
 

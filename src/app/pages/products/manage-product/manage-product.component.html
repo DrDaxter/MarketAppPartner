@@ -53,7 +53,7 @@
               <mat-label>Category</mat-label>
               <input type="text" matInput formControlName="category" [matAutocomplete]="auto">
               <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                <mat-option *ngFor="let option of filteredOptions | async" [value]="option.uid">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                   {{option.category_name}}
                   
                 </mat-option>
