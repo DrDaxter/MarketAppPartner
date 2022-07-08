@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //angular fire
@@ -24,21 +23,22 @@ import { ProductsModule } from './pages/products/products.module';
 import {AngularFireModule,} from '@angular/fire/compat';
 import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
 import {MatBadgeModule} from '@angular/material/badge';
+import { LoginModule } from './pages/login/login.module';
 //import { FirebaseStorage } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     HomeComponent,
     HeaderComponent,
   ],
   imports: [
+    ProductsModule,
+    LoginModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule.enablePersistence(),
-    
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -48,7 +48,6 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatToolbarModule,
     MatNativeDateModule,
     MatListModule,
-    ProductsModule,
     MatButtonModule,
     MatIconModule,
     MatBadgeModule

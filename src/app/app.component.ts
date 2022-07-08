@@ -1,15 +1,18 @@
-import { Component, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { Subscription } from 'rxjs';
+import { AuthService } from './services/auth/auth.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  temporaryDisabled: boolean = false;
+export class AppComponent implements OnInit{
+  buttonClickedSuscription!:Subscription;
   @ViewChild('sidenav') sidenav!:MatSidenav;
-
+  showNavbar:boolean = true;
+  temporaryDisabled: boolean = false;
   toggle:boolean = true;
   iconToggle:boolean = true;
   fullMenu:boolean = true;
@@ -23,10 +26,21 @@ export class AppComponent {
   ];
   title = 'myFoodPartner';
 
-  constructor(){
+  constructor(
+    private authService: AuthService,
+    private cdRef:ChangeDetectorRef
+  ){
     this.default_margin = "200px";
   }
 
+  ngOnInit(){
+    this.buttonClickedSuscription = this.authService.getEventClicked().subscribe((resolve:boolean) => {
+      console.log(resolve);
+      this.fullMenu = resolve;
+      this.showNavbar = resolve;
+      this.cdRef.detectChanges();
+    });
+  }
 
   changeArrow(pixel:string){
     this.default_margin = pixel;

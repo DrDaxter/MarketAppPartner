@@ -1,4 +1,4 @@
-<app-header></app-header>
+<app-header *ngIf="showNavbar"></app-header>
 <mat-sidenav-container [@.disabled]="temporaryDisabled">
   <mat-sidenav mode="side" [(opened)]="fullMenu" *ngIf="toggle" class="drawer-main"
     id="side1">

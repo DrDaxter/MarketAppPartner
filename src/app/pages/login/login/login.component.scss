@@ -1,0 +1,79 @@
+@font-face {
+    font-family: Roboto;
+    src: url(../../../../assets/fonts/roboto/Roboto-Black.ttf) format("truetype");
+}
+
+.content{
+    width: 100%;
+    height: 100%;
+}
+
+.login-content{
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    height: 20px;
+
+    mat-grid-list{
+        width: 100%;
+        height: 100%;
+
+        mat-grid-tile{
+            background: #1f1f1f !important;
+            height: 100%;
+
+            .img-above{
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.548);
+                text-align: center;
+                h1{
+                    font-family: 'Roboto';
+                    color: #e9e6e6;
+                    font-size: 2rem;
+                    margin-top: 50%;
+                }
+            }
+        }
+
+        .login-form-content{
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            /* padding-top: 20px !important; */
+            form{
+                text-align: center;
+                margin-right: auto;
+                margin-left: auto;
+                width: 50%;
+                height: 100%;
+
+                mat-label,input{
+                    color: #e9e6e6;
+                }
+
+                ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+                    color: #e9e6e6;
+                }
+
+                button{
+                    width: 100%;
+                    border: 1px solid #e9e6e6;
+                    color: aqua;
+                }
+            }
+        }
+    }
+}
+
+h1{
+    font-family: 'Roboto';
+    color: #e9e6e6;
+    font-size: 1.5rem;
+}
+
+#login-banner{
+    width: 100%;
+    height: 100%;
+}
+    

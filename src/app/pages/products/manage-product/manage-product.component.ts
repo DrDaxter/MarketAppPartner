@@ -98,7 +98,7 @@ export class ManageProductComponent implements OnInit {
     products.category_uid = productForm.category;
     console.log(products);
     
-    /* console.log(products);
+    /* console.log(products)
     this.firestoreService.addElement("product",products).then((resolve) => {
       console.log(resolve);
       if(this.selectedFile != null){
