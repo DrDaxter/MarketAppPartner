@@ -13,7 +13,7 @@ import {ProductsClass,categories} from '../../../models/products';
   styleUrls: ['./manage-product.component.scss']
 })
 export class ManageProductComponent implements OnInit {
-  
+  products = new ProductsClass();
   productsForm!: FormGroup;
   pCategories:categories[] = [];
 
@@ -93,13 +93,15 @@ export class ManageProductComponent implements OnInit {
 
   saveProduct(productForm:any){
     console.log(productForm);
-    //this.showLoader = true;
-    let products:ProductsClass = productForm;
-    products.category_uid = productForm.category;
-    console.log(products);
+    this.showLoader = true;
+    this.products.category_uid = productForm.category.uid;
+    this.products.name = productForm.name;
+    this.products.description = productForm.description;
+    this.products.price = productForm.price;
+    this.products.commerce_uid = "cSb4yeU6BwCsGgNthPV2";
     
-    /* console.log(products)
-    this.firestoreService.addElement("product",products).then((resolve) => {
+    console.log(this.products)
+    this.firestoreService.addElement("product",{...this.products}).then((resolve) => {
       console.log(resolve);
       if(this.selectedFile != null){
         this.firebaseStorageService.uploadImage(this.selectedFile,resolve as string).then(res => {
@@ -112,7 +114,7 @@ export class ManageProductComponent implements OnInit {
       }
       this.productsForm.reset();
       this.selectedFile = null;
-    }); */
+    });
   }
 
   loadCategories(){

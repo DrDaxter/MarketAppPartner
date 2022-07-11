@@ -9,6 +9,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from 'src/environments/environment';
 import { provideFirebaseApp, initializeApp} from '@angular/fire/app';
 import { getFirestore,provideFirestore } from '@angular/fire/firestore'
+
+import {AngularFireModule,} from '@angular/fire/compat';
+import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 //material component
 import { MatSliderModule } from '@angular/material/slider';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -20,8 +24,6 @@ import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { ProductsModule } from './pages/products/products.module';
-import {AngularFireModule,} from '@angular/fire/compat';
-import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
 import {MatBadgeModule} from '@angular/material/badge';
 import { LoginModule } from './pages/login/login.module';
 //import { FirebaseStorage } from '@angular/fire/storage';
@@ -39,6 +41,7 @@ import { LoginModule } from './pages/login/login.module';
     provideFirestore(() => getFirestore()),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule.enablePersistence(),
+    AngularFireAuthModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
