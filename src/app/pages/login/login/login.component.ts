@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
   signIn(data:any){
     console.log(data);
 
-    this.authService.registerWithEmail(data.email,data.password).then(resolve => {
+    this.authService.loginWithEmail(data.email,data.password).then(resolve => {
       console.log(resolve);
     })
   }
