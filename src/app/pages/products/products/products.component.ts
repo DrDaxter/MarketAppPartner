@@ -23,10 +23,10 @@ export class ProductsComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.firestore.getOne().subscribe((res:any) => {
+    this.firestore.getOne<ProductsClass>().subscribe((res:ProductsClass[]) => {
       console.log(res);
       this.elementData = res;
-      this.dataSource = new MatTableDataSource<ProductsClass>(this.elementData);
+      this.dataSource = new MatTableDataSource<ProductsClass>(res);
       this.dataSource.paginator = this.paginator;
     });
   }
