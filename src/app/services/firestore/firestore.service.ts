@@ -16,7 +16,7 @@ export class FirestoreService {
     private afs: AngularFirestore
   ) { }
 
-  getOne<T>():Observable<T[]>{
+  getWhere1<T>():Observable<T[]>{
     const ref = collection(this.firestore, 'product');
     const data = query(ref, where("commerce_uid", "==", "cSb4yeU6BwCsGgNthPV2"));
     console.log(data);
@@ -32,9 +32,9 @@ export class FirestoreService {
     
   }
 
-  getAll(collectionName:string): Observable<categories[]>{
+  getAll<T>(collectionName:string): Observable<T[]>{
     const ref = collection(this.firestore, collectionName);
-    return collectionData(ref) as Observable<categories[]>;
+    return collectionData(ref) as Observable<T[]>;
   }
 
 
