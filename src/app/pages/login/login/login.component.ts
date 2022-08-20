@@ -1,13 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations'
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  animations: [
+    trigger('popOverState', [
+      state('show', style({
+        opacity: 1
+      })),
+      state('hide',   style({
+        opacity: 0
+      })),
+      transition('show => hide', animate('600ms ease-out')),
+      transition('hide => show', animate('1000ms ease-in'))
+    ])
+  ]
 })
 export class LoginComponent implements OnInit {
+  show = false;
   loginForm!:FormGroup;
   validationMessage = {
     password: [
@@ -32,6 +52,15 @@ export class LoginComponent implements OnInit {
         Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$")
       ]))
     })
+  }
+
+  get stateName() {
+    return this.show ? 'show' : 'hide'
+  }
+
+
+  toggle() {
+    this.show = !this.show;
   }
 
   ngOnInit(): void {

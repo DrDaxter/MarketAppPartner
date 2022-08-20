@@ -1,15 +1,15 @@
-<div class="content">
+
     <div class="login-content">
-        <mat-grid-list cols="2" rowHeight="2:1">
+        <mat-grid-list cols="2" rowHeight="2:2">
             <mat-grid-tile>
                 <div class="img-above">
                     <h1>Sell your products with us</h1>
                 </div>
                 <!-- Photo by Aleksandar Pasaric: https://www.pexels.com/photo/photo-of-supermarket-3423860/ -->
-                <img src="assets/img/login-banner.jpg" alt="banner" id="login-banner">
+                <img src="assets/img/login-banner.jpg" alt="banner" id="login-banner"> 
             </mat-grid-tile>
             <mat-grid-tile class="login-form-content">
-                <form [formGroup]="loginForm" (ngSubmit)="signIn(loginForm.value)">
+                <form [formGroup]="loginForm" (ngSubmit)="signIn(loginForm.value)" >
                     <br><br><br><br><br><br><br>
                     <h1>Sign In</h1>
                     <mat-form-field appearance="outline" style="width: 100%;">
@@ -39,8 +39,9 @@
                     </ng-container>
                     <br><br>
                     <button type="submit" mat-stroked-button color="primary" [disabled]="!loginForm.valid">Primary</button>
+                    <br>
+                    <h4 style="color: #fafafa;">Don't have an acount yet? <a>register</a></h4>
                 </form>
             </mat-grid-tile>
         </mat-grid-list>
     </div>
-</div>

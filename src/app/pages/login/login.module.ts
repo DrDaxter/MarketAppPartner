@@ -5,11 +5,14 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SigInComponent } from './sig-in/sig-in.component';
 
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    SigInComponent
   ],
   imports: [
     CommonModule,
@@ -17,6 +20,7 @@ import { MatInputModule } from '@angular/material/input';
     ReactiveFormsModule,
     MatButtonModule,
     MatInputModule,
+    BrowserAnimationsModule
   ],
   exports:[
     LoginComponent

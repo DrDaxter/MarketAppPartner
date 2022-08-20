@@ -3,24 +3,22 @@
     src: url(../../../../assets/fonts/roboto/Roboto-Black.ttf) format("truetype");
 }
 
-.content{
-    width: 100%;
-    height: 100%;
-}
-
 .login-content{
     margin-left: auto;
     margin-right: auto;
     width: 90%;
-    height: 20px;
+    height: 10px;
 
     mat-grid-list{
         width: 100%;
         height: 100%;
+        background: #1f1f1f !important; 
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
 
         mat-grid-tile{
             background: #1f1f1f !important;
-            height: 100%;
+            /* height: 100%; */
 
             .img-above{
                 position: absolute;
@@ -62,10 +60,22 @@
                     border: 2px solid green;
                     color: #e9e6e6;
                 }
+
+                a{
+                    color: #5252cc;
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
             }
         }
     }
 }
+
+/* ::ng-deep .mat-grid-tile-content
+{
+    width: auto;
+    height: 100%;
+} */
 
 h1{
     font-family: 'Roboto';
