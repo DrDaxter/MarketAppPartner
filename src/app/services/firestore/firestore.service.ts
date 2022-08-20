@@ -4,7 +4,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/comp
 import { Firestore, collectionData, collection, query, } from '@angular/fire/firestore';
 import { addDoc, doc, where } from 'firebase/firestore';
 import { Observable } from 'rxjs';
-import { categories } from 'src/app/models/products';
+import { categories, ProductsClass } from 'src/app/models/products';
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +16,11 @@ export class FirestoreService {
     private afs: AngularFirestore
   ) { }
 
-  getOne(){
+  getWhere1<T>():Observable<T[]>{
     const ref = collection(this.firestore, 'product');
     const data = query(ref, where("commerce_uid", "==", "cSb4yeU6BwCsGgNthPV2"));
     console.log(data);
-    return collectionData(data);
+    return collectionData(data) as Observable<T[]>;
   }
 
   addElement<T>(collectionName:string,item:any){//we use angular fire compact to be able to generate the id before save the data
@@ -32,9 +32,9 @@ export class FirestoreService {
     
   }
 
-  getAll(collectionName:string): Observable<categories[]>{
+  getAll<T>(collectionName:string): Observable<T[]>{
     const ref = collection(this.firestore, collectionName);
-    return collectionData(ref) as Observable<categories[]>;
+    return collectionData(ref) as Observable<T[]>;
   }
 
 

@@ -118,7 +118,7 @@ export class ManageProductComponent implements OnInit {
   }
 
   loadCategories(){
-    this.firestoreService.getAll("categories").subscribe((result:categories[]) =>{
+    this.firestoreService.getAll<categories>("categories").subscribe((result:categories[]) =>{
       this.pCategories = result;
       console.log(result);
       this.filteredOptions = this.productsForm.valueChanges.pipe(
