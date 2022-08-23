@@ -1,0 +1,40 @@
+form{
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+    width: 50%;
+    height: 100%;
+
+    mat-label,input{
+        color: #e9e6e6;
+    }
+
+    ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+        color: #e9e6e6;
+    }
+
+    button{
+        width: 100%;
+        background-color: #050504;
+        color: #e9e6e6;
+    }
+
+    button:disabled{
+        width: 100%;
+        background-color: #050504;
+        color: #e9e6e6;
+        border: 0px;
+    }
+
+    a{
+        color: #5252cc;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    h1{
+        font-family: 'Roboto';
+        color: #e9e6e6;
+        font-size: 1.5rem;
+    }
+}

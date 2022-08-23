@@ -38,44 +38,12 @@
         .login-form-content{
             border-top-right-radius: 20px;
             border-bottom-right-radius: 20px;
-            /* padding-top: 20px !important; */
-            form{
-                text-align: center;
-                margin-right: auto;
-                margin-left: auto;
-                width: 50%;
-                height: 100%;
-
-                mat-label,input{
-                    color: #e9e6e6;
-                }
-
-                ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
-                    color: #e9e6e6;
-                }
-
-                button{
-                    width: 100%;
-                    border: 1px solid #e9e6e6;
-                    border: 2px solid green;
-                    color: #e9e6e6;
-                }
-
-                a{
-                    color: #5252cc;
-                    text-decoration: underline;
-                    cursor: pointer;
-                }
+            app-get-in{
+                width: 100%;
             }
         }
     }
 }
-
-/* ::ng-deep .mat-grid-tile-content
-{
-    width: auto;
-    height: 100%;
-} */
 
 h1{
     font-family: 'Roboto';

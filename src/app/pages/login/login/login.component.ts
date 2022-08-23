@@ -28,30 +28,11 @@ import {
 })
 export class LoginComponent implements OnInit {
   show = false;
-  loginForm!:FormGroup;
-  validationMessage = {
-    password: [
-      {type: "required", message: "Password is required"},
-    ],
-    email: [
-      {type: "required", message: "Email is required"},
-      {type: "pattern", message: "Email is invalid"}
-    ],
-  };
 
   constructor(
     private authService: AuthService,
-    private formBuilder:FormBuilder,
   ) { 
-    this.loginForm = this.formBuilder.group({
-      password: new FormControl("",Validators.compose([
-        Validators.required
-      ])),
-      email: new FormControl("",Validators.compose([
-        Validators.required,
-        Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$")
-      ]))
-    })
+    
   }
 
   get stateName() {
@@ -65,14 +46,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.emitToggle(false);
-  }
-
-  signIn(data:any){
-    console.log(data);
-
-    this.authService.loginWithEmail(data.email,data.password).then(resolve => {
-      console.log(resolve);
-    })
   }
 
   emitToggle(option:boolean){

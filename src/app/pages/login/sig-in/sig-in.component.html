@@ -1,4 +1,4 @@
-<form [formGroup]="loginForm" (ngSubmit)="signIn(loginForm.value)" >
+<form [formGroup]="signForm" (ngSubmit)="sigIn(signForm.value)" >
     <br><br><br><br><br><br><br>
     <h1>Sign In</h1>
     <mat-form-field appearance="outline" style="width: 100%;">
@@ -7,8 +7,8 @@
     </mat-form-field>
     <ng-container *ngFor="let validation of validationMessage.email">
         <div *ngIf="
-          loginForm.get('email')!.hasError(validation.type) && 
-          (loginForm.get('email')!.dirty || loginForm.get('email')!.touched)"
+          signForm.get('email')!.hasError(validation.type) && 
+          (signForm.get('email')!.dirty || signForm.get('email')!.touched)"
         >
           <p style="color: red;">{{validation.message}}</p>
         </div>
@@ -20,14 +20,31 @@
     </mat-form-field>
     <ng-container *ngFor="let validation of validationMessage.password">
         <div *ngIf="
-          loginForm.get('password')!.hasError(validation.type) && 
-          (loginForm.get('password')!.dirty || loginForm.get('password')!.touched)"
+          signForm.get('password')!.hasError(validation.type) && 
+          (signForm.get('password')!.dirty || signForm.get('password')!.touched)"
         >
           <p style="color: red;">{{validation.message}}</p>
         </div>
     </ng-container>
     <br><br>
-    <button type="submit" mat-stroked-button color="primary" [disabled]="!loginForm.valid">Primary</button>
+    <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Confirm Password</mat-label>
+        <input type="password" matInput formControlName="confirmPassword">
+    </mat-form-field>
+    <ng-container *ngFor="let validation of validationMessage.password">
+        <div *ngIf="
+          signForm.get('password')!.hasError(validation.type) && 
+          (signForm.get('password')!.dirty || signForm.get('password')!.touched)"
+        >
+          <p style="color: red;">{{validation.message}}</p>
+        </div>
+    </ng-container>
+    <ng-container>
+      <p style="color: red;">Password does not match</p>
+    </ng-container>
+    
+    <br><br>
+    <button type="submit" mat-stroked-button color="primary" [disabled]="!signForm.valid">Primary</button>
     <br>
     <h4 style="color: #fafafa;">Don't have an acount yet? <a>register</a></h4>
 </form>
