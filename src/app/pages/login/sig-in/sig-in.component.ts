@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Output,EventEmitter} from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { SignUpInterface } from 'src/app/interfaces/signupInterface';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
@@ -8,7 +9,8 @@ import { AuthService } from 'src/app/services/auth/auth.service';
   styleUrls: ['./sig-in.component.scss']
 })
 export class SigInComponent implements OnInit {
-  signForm!:FormGroup; 
+  signForm!:FormGroup;
+  @Output() onNewUser:EventEmitter<SignUpInterface> = new EventEmitter();
   validationMessage = {
     password: [
       {type: "required", message: "Password is required"},
@@ -23,7 +25,6 @@ export class SigInComponent implements OnInit {
   };
   constructor(
     private formBuilder:FormBuilder,
-    private authService:AuthService
   ) { 
     this.signForm = this.formBuilder.group({
         password: new FormControl("",Validators.compose([
@@ -35,14 +36,18 @@ export class SigInComponent implements OnInit {
         email: new FormControl("", Validators.compose([
           Validators.required
         ]))
-      },
-      [CustomValidators.MatchValidator('password', 'confirmPassword')]
-    );
+    });
+    this.signForm.addValidators(
+      this.createCompareValidator(
+        this.signForm.get('password'),
+        this.signForm.get('confirmPassword')
+      )
+     );
   }
 
   get passwordMatchError() {
     return (
-      this.signForm.getError('mismatch') &&
+      this.signForm.hasError('mismatch') &&
       this.signForm.get('confirmPassword')?.touched
     );
   }
@@ -50,22 +55,16 @@ export class SigInComponent implements OnInit {
   ngOnInit(){
   }
 
-  sigIn(data:any){
-
+  sigIn(data:SignUpInterface){
+    this.onNewUser.emit(data);
   }  
 
-}
-
-//custom confirm password validator
-class CustomValidators{
-  static MatchValidator(source: string, target: string): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const sourceCtrl = control.get(source);
-      const targetCtrl = control.get(target);
-
-      return sourceCtrl && targetCtrl && sourceCtrl.value !== targetCtrl.value
-        ? { mismatch: true }
-        : null;
+  createCompareValidator(controlOne: AbstractControl | null, controlTwo: AbstractControl | null) {
+    return () => {
+      if (controlOne?.value !== controlTwo?.value)
+        return { match_error: 'Value does not match' }; 
+      return null;
     };
   }
+
 }

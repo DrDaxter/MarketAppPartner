@@ -9,7 +9,13 @@
                 <img src="assets/img/login-banner.jpg" alt="banner" id="login-banner"> 
             </mat-grid-tile>
             <mat-grid-tile class="login-form-content">
-                <app-get-in></app-get-in>
+                <div class="formsGroup">
+                    <app-get-in *ngIf="!isRegisterActive"></app-get-in>
+                    <app-sig-in (onNewUser)="registerNewUser($event)" *ngIf="isRegisterActive"></app-sig-in>
+                    <br>
+                    <h4 style="color: #fafafa;">Don't have an acount yet? <a (click)="showRegister()">register</a></h4>
+                </div>
+                
             </mat-grid-tile>
         </mat-grid-list>
     </div>

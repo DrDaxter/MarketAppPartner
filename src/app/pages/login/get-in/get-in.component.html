@@ -1,5 +1,5 @@
 <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)" >
-    <br><br><br><br><br><br><br>
+    <br>
     <h1>Sign In</h1>
     <mat-form-field appearance="outline" style="width: 100%;">
         <mat-label>E-mail</mat-label>
@@ -10,7 +10,7 @@
           loginForm.get('email')!.hasError(validation.type) && 
           (loginForm.get('email')!.dirty || loginForm.get('email')!.touched)"
         >
-          <p style="color: red;">{{validation.message}}</p>
+          <p style="color: red; margin: 0px;">{{validation.message}}</p>
         </div>
     </ng-container>
     <br><br>
@@ -23,11 +23,9 @@
           loginForm.get('password')!.hasError(validation.type) && 
           (loginForm.get('password')!.dirty || loginForm.get('password')!.touched)"
         >
-          <p style="color: red;">{{validation.message}}</p>
+          <p style="color: red;margin: 0px;">{{validation.message}}</p>
         </div>
     </ng-container>
     <br><br>
     <button type="submit" mat-stroked-button [disabled]="!loginForm.valid">Login</button>
-    <br>
-    <h4 style="color: #fafafa;">Don't have an acount yet? <a>register</a></h4>
 </form>

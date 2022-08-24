@@ -1,6 +1,6 @@
 <form [formGroup]="signForm" (ngSubmit)="sigIn(signForm.value)" >
-    <br><br><br><br><br><br><br>
-    <h1>Sign In</h1>
+    <br><br><br><br><br><br>
+    <h1>Sign Up</h1>
     <mat-form-field appearance="outline" style="width: 100%;">
         <mat-label>E-mail</mat-label>
         <input type="email" matInput formControlName="email">
@@ -33,18 +33,21 @@
     </mat-form-field>
     <ng-container *ngFor="let validation of validationMessage.password">
         <div *ngIf="
-          signForm.get('password')!.hasError(validation.type) && 
-          (signForm.get('password')!.dirty || signForm.get('password')!.touched)"
+          signForm.get('confirmPassword')!.hasError(validation.type) && 
+          (signForm.get('confirmPassword')!.dirty || signForm.get('confirmPassword')!.touched)"
         >
           <p style="color: red;">{{validation.message}}</p>
         </div>
     </ng-container>
-    <ng-container>
+    <ng-container *ngIf="
+      signForm.getError('match_error') &&
+      (signForm.get('confirmPassword')!.dirty || signForm.get('confirmPassword')!.touched)
+    ">
       <p style="color: red;">Password does not match</p>
     </ng-container>
     
     <br><br>
-    <button type="submit" mat-stroked-button color="primary" [disabled]="!signForm.valid">Primary</button>
+    <button type="submit" mat-stroked-button color="primary" [disabled]="!signForm.valid">Sign Up</button>
     <br>
     <h4 style="color: #fafafa;">Don't have an acount yet? <a>register</a></h4>
 </form>

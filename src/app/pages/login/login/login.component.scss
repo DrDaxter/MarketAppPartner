@@ -38,9 +38,22 @@
         .login-form-content{
             border-top-right-radius: 20px;
             border-bottom-right-radius: 20px;
-            app-get-in{
-                width: 100%;
+            .formsGroup{
+                flex-direction: row; 
+                width: 100%; 
+                text-align: center;
+                
+                a{
+                    color: #5252cc;
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
+                
+                app-get-in{
+                    width: 100%;
+                }
             }
+           
         }
     }
 }
