@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { SESSION_STORAGE } from 'ngx-webstorage-service';
+import { SESSION_GENERAL_STORAGE,SessionStorageService } from './services/sessionStorage/session-storage.service';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -37,6 +40,7 @@ import { LoginModule } from './pages/login/login.module';
   imports: [
     ProductsModule,
     LoginModule,
+    
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -56,7 +60,8 @@ import { LoginModule } from './pages/login/login.module';
     MatBadgeModule
   ],
   providers: [
-
+    { provide: SESSION_GENERAL_STORAGE, useExisting: SESSION_STORAGE },
+    SessionStorageService
   ],
   bootstrap: [AppComponent]
 })

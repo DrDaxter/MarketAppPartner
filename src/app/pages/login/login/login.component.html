@@ -10,10 +10,10 @@
             </mat-grid-tile>
             <mat-grid-tile class="login-form-content">
                 <div class="formsGroup">
-                    <app-get-in *ngIf="!isRegisterActive"></app-get-in>
-                    <app-sig-in (onNewUser)="registerNewUser($event)" *ngIf="isRegisterActive"></app-sig-in>
+                    <app-get-in *ngIf="!getIsRegisterActive"></app-get-in>
+                    <app-sig-in (onNewUser)="registerNewUser($event)" *ngIf="getIsRegisterActive"></app-sig-in>
                     <br>
-                    <h4 style="color: #fafafa;">Don't have an acount yet? <a (click)="showRegister()">register</a></h4>
+                    <h4 style="color: #fafafa;" *ngIf="!getIsRegisterActive">Don't have an acount yet? <a (click)="showRegister()">register</a></h4>
                 </div>
                 
             </mat-grid-tile>

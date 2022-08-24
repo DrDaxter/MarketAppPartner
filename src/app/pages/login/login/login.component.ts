@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, Inject, OnInit } from '@angular/core';
+
 import { SignUpInterface } from 'src/app/interfaces/signupInterface';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { SessionStorageService } from 'src/app/services/sessionStorage/session-storage.service';
 
 
 @Component({
@@ -14,8 +15,13 @@ export class LoginComponent implements OnInit {
   isRegisterActive = false;
   constructor(
     private authService: AuthService,
+    private sessionStorage:SessionStorageService
   ) { 
     
+  }
+
+  get getIsRegisterActive(){
+    return this.sessionStorage.getItem('isRegisterActive');
   }
 
   ngOnInit(): void {
@@ -24,10 +30,14 @@ export class LoginComponent implements OnInit {
 
   showRegister(){
     this.isRegisterActive = !this.isRegisterActive;
+    this.sessionStorage.setItem('isRegisterActive',this.isRegisterActive);
   }
 
   registerNewUser(data:SignUpInterface){
     console.log(data.email);
+    this.authService.registerWithEmail(data.email,data.password).then(resolve => {
+      console.log(resolve);
+    });
   }
 
   emitToggle(option:boolean){
