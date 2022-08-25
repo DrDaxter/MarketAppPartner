@@ -10,7 +10,7 @@
           signForm.get('email')!.hasError(validation.type) && 
           (signForm.get('email')!.dirty || signForm.get('email')!.touched)"
         >
-          <p style="color: red;">{{validation.message}}</p>
+          <p class="errorText">{{validation.message}}</p>
         </div>
     </ng-container>
     <br><br>
@@ -23,7 +23,7 @@
           signForm.get('password')!.hasError(validation.type) && 
           (signForm.get('password')!.dirty || signForm.get('password')!.touched)"
         >
-          <p style="color: red;">{{validation.message}}</p>
+          <p class="errorText">{{validation.message}}</p>
         </div>
     </ng-container>
     <br><br>
@@ -36,14 +36,14 @@
           signForm.get('confirmPassword')!.hasError(validation.type) && 
           (signForm.get('confirmPassword')!.dirty || signForm.get('confirmPassword')!.touched)"
         >
-          <p style="color: red;">{{validation.message}}</p>
+          <p class="errorText">{{validation.message}}</p>
         </div>
     </ng-container>
     <ng-container *ngIf="
       signForm.getError('match_error') &&
       (signForm.get('confirmPassword')!.dirty || signForm.get('confirmPassword')!.touched)
     ">
-      <p style="color: red;">Password does not match</p>
+      <p class="errorText">Password does not match</p>
     </ng-container>
     
     <br><br>

@@ -1,4 +1,5 @@
 export const environment = {
+  generalAvatar:'https://firebasestorage.googleapis.com/v0/b/storeapp-4df21.appspot.com/o/assets%2Fuser_avatar.png?alt=media&token=422de8be-d53c-4343-9e07-8d032475879e',
   production: true,
   firebaseConfig : {
     apiKey: "AIzaSyB9fqKBDkLY13LBf-U0vWvbGApUJu_AQyg",

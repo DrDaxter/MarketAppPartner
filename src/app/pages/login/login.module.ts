@@ -5,7 +5,9 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatDialogModule} from '@angular/material/dialog';
 import { SigInComponent } from './sig-in/sig-in.component';
 import { GetInComponent } from './get-in/get-in.component';
 
@@ -22,6 +24,8 @@ import { GetInComponent } from './get-in/get-in.component';
     ReactiveFormsModule,
     MatButtonModule,
     MatInputModule,
+    MatProgressSpinnerModule,
+    MatDialogModule,
     BrowserAnimationsModule
   ],
   exports:[

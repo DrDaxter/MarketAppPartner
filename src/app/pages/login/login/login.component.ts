@@ -1,7 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 
 import { SignUpInterface } from 'src/app/interfaces/signupInterface';
+import { UserInterface } from 'src/app/interfaces/userInterface';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { FirestoreService } from 'src/app/services/firestore/firestore.service';
 import { SessionStorageService } from 'src/app/services/sessionStorage/session-storage.service';
 
 
@@ -13,9 +15,19 @@ import { SessionStorageService } from 'src/app/services/sessionStorage/session-s
 export class LoginComponent implements OnInit {
   show = false;
   isRegisterActive = false;
+  showLoader = false;
+  userData:UserInterface = {
+    displayName:"",
+    email:"",
+    image:"",
+    name:"",
+    lastName:"",
+    uid:""
+  };
   constructor(
     private authService: AuthService,
-    private sessionStorage:SessionStorageService
+    private sessionStorage:SessionStorageService,
+    private firestoreService:FirestoreService
   ) { 
     
   }
@@ -34,9 +46,14 @@ export class LoginComponent implements OnInit {
   }
 
   registerNewUser(data:SignUpInterface){
-    console.log(data.email);
+    this.showLoader = true;
     this.authService.registerWithEmail(data.email,data.password).then(resolve => {
-      console.log(resolve);
+      const {user} = resolve;
+      this.userData = {...this.userData, email: user?.email!!, uid:user!.uid}
+      this.firestoreService.addElement('user',{...this.userData}).then(resolve2 =>{
+        
+        this.showLoader = false;
+      })
     });
   }
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import firebase from 'firebase/compat/app';
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +26,8 @@ export class AuthService {
     });
   }
 
-  public registerWithEmail(email: string, password: string): Promise<any> {
-    return new Promise((resolve, reject) => {
+  public registerWithEmail(email: string, password: string): Promise<firebase.auth.UserCredential> {
+    return new Promise<firebase.auth.UserCredential>((resolve, reject) => {
       this.afAuth.createUserWithEmailAndPassword(email, password).then(res => {
         console.log('1 - createUserWithEmailAndPassword res: ', res);
         resolve(res);

@@ -14,6 +14,7 @@ export class SigInComponent implements OnInit {
   validationMessage = {
     password: [
       {type: "required", message: "Password is required"},
+      {type: "minlength", message: "Password must have 6 characters"},
     ],
     confirmPassword:[
       {type: "required", message: "Password is required"},
@@ -28,13 +29,15 @@ export class SigInComponent implements OnInit {
   ) { 
     this.signForm = this.formBuilder.group({
         password: new FormControl("",Validators.compose([
-          Validators.required
+          Validators.required,
+          Validators.minLength(6)
         ])),
         confirmPassword: new FormControl("", Validators.compose([
-          Validators.required
+          Validators.required,
         ])),
         email: new FormControl("", Validators.compose([
-          Validators.required
+          Validators.required,
+          Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$")
         ]))
     });
     this.signForm.addValidators(
