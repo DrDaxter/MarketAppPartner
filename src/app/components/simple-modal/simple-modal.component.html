@@ -2,12 +2,16 @@
 <div mat-dialog-content>
   {{data.text1}}
 </div>
-<div mat-dialog-actions>
-  <button mat-button mat-dialog-close
-    *ngIf="data.isActiveBtn2">{{data.textBtn2}}</button>
+<div mat-dialog-actions class="buttonsContent">
+  <button mat-button 
+    mat-dialog-close
+    *ngIf="data.isActiveBtn2"
+    class="btn2"
+  >{{data.textBtn2}}</button>
   <button mat-button 
         cdkFocusInitial
         [mat-dialog-close]="true"
         *ngIf="data.isActiveBtn1"
+        class="btn1"
     >{{data.textBtn1}}</button>
 </div>

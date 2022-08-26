@@ -5,5 +5,5 @@ export interface SimplemodalDataInterface{
     isActiveBtn1:boolean,
     isActiveBtn2:boolean,
     textBtn1:string,
-    textBtn2?:string | "Cancel"
+    textBtn2?:string
 }

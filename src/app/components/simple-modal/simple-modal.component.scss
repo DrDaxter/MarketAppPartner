@@ -1,0 +1,11 @@
+.buttonsContent{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    .btn1{
+        width: 100%;
+    }
+    .btn2{
+        width: 100%;
+    }
+}

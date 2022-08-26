@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
 import { SimpleModalComponent } from 'src/app/components/simple-modal/simple-modal.component';
 import { SimplemodalDataInterface } from 'src/app/interfaces/extraInterfaces';
 
@@ -11,9 +12,8 @@ export class ModalsServiceService {
     private dialog: MatDialog
   ) { }
 
-  showSimpleModal(header:string,text1:string,isActiveBtn1:boolean, isActiveBtn2:boolean, 
-    textBtn1:string,textBtn2?:string,text2?:string) {
-      let response:any;
+  showSimpleModal(modalWidth:string,header:string,text1:string,isActiveBtn1:boolean, isActiveBtn2:boolean, 
+    textBtn1:string,textBtn2:string = 'Cancel',text2?:string):Observable<boolean> {
     const simplemodalData:SimplemodalDataInterface = {
         header:header,
         text1:text1,
@@ -24,14 +24,13 @@ export class ModalsServiceService {
         textBtn2:textBtn2
       }
     const dialogRef = this.dialog.open(SimpleModalComponent, {
-      width:'250px',
+      width:modalWidth,
       data:{...simplemodalData}
-      /* data:{header:"User has been created",text:"Now you have a new user :D",btn1Active:false,btn} */
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    return dialogRef.afterClosed();/* .subscribe(result => {
       console.log('The dialog was closed');
       response = result;
-    });
+    }); */
   }
 }

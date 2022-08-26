@@ -10,12 +10,12 @@
             </mat-grid-tile>
             <mat-grid-tile class="login-form-content">
                 <div class="formsGroup">
-                    <app-get-in *ngIf="!getIsRegisterActive"></app-get-in>
+                    <app-get-in (onLoginUser)="loginUser($event)" *ngIf="!getIsRegisterActive"></app-get-in>
                     <app-sig-in (onNewUser)="registerNewUser($event)" *ngIf="getIsRegisterActive"></app-sig-in>
                     <br>
                     <h4 style="color: #fafafa;" *ngIf="!getIsRegisterActive">Don't have an acount yet? <a (click)="showRegister()">register</a></h4>
+                    <!-- <button style="background-color: red; width: 100%;" (click)="prueba()">Prueba</button> -->
                 </div>
-                
             </mat-grid-tile>
         </mat-grid-list>
     </div>

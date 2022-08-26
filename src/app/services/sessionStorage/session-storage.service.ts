@@ -19,4 +19,8 @@ export class SessionStorageService {
   setItem(key:string, value:string | boolean){
     this.storage.set(key,value);
   }
+
+  removeItem(key:string){
+    this.storage.remove(key);
+  }
 }

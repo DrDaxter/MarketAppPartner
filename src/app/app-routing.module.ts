@@ -4,14 +4,15 @@ import { LoginComponent } from './pages/login/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProductsComponent } from './pages/products/products/products.component';
 import { ManageProductComponent } from './pages/products/manage-product/manage-product.component';
+import { AuthGuardGuard } from './guards/auth-guard/auth-guard.guard';
 
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
-  {path: 'home', component: HomeComponent},
-  {path: 'product', component: ProductsComponent},
-  {path: 'manageProductComponent', component: ManageProductComponent}
+  {path: 'home', component: HomeComponent, canActivate:[AuthGuardGuard]},
+  {path: 'product', component: ProductsComponent, canActivate:[AuthGuardGuard]},
+  {path: 'manageProductComponent', component: ManageProductComponent, canActivate:[AuthGuardGuard]}
 ];  
 
 @NgModule({

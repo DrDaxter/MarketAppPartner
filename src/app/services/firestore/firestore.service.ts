@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { 
+  AngularFirestore, 
+  AngularFirestoreCollection,
+  AngularFirestoreDocument
+} from '@angular/fire/compat/firestore';
 
 import { Firestore, collectionData, collection, query, } from '@angular/fire/firestore';
 import { addDoc, doc, where } from 'firebase/firestore';
@@ -16,6 +20,11 @@ export class FirestoreService {
     private afs: AngularFirestore
   ) { }
 
+  getByPath<T>(path:string): Promise<AngularFirestoreDocument<T>>{
+    return new Promise(resolve => {
+      resolve(this.afs.doc(path));
+    });
+  }
   
   addElement<T>(collectionName:string,item:any){//we use angular fire compact to be able to generate the id before save the data
     return new Promise(resolve => {

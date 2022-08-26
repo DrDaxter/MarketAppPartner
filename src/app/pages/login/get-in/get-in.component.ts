@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { SignUpInterface } from 'src/app/interfaces/signupInterface';
 
 @Component({
   selector: 'app-get-in',
@@ -8,9 +9,11 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class GetInComponent implements OnInit {
   loginForm!:FormGroup;
+  @Output() onLoginUser:EventEmitter<SignUpInterface> = new EventEmitter();
   validationMessage = {
     password: [
       {type: "required", message: "Password is required"},
+      {type: "minlength", message: "Password must have 6 characters"},
     ],
     email: [
       {type: "required", message: "Email is required"},
@@ -22,7 +25,8 @@ export class GetInComponent implements OnInit {
   ) { 
     this.loginForm = this.formBuilder.group({
       password: new FormControl("",Validators.compose([
-        Validators.required
+        Validators.required,
+        Validators.minLength(6)
       ])),
       email: new FormControl("",Validators.compose([
         Validators.required,
@@ -34,12 +38,8 @@ export class GetInComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  login(data:any){
-    console.log(data);
-
-   /*  this.authService.loginWithEmail(data.email,data.password).then(resolve => {
-      console.log(resolve);
-    }) */
+  login(data:SignUpInterface){
+    this.onLoginUser.emit(data);
   }
 
 }
