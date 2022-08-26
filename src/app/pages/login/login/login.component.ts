@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { SignUpInterface } from 'src/app/interfaces/signupInterface';
 import { UserInterface } from 'src/app/interfaces/userInterface';
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private sessionStorage:SessionStorageService,
-    private firestoreService:FirestoreService
+    private firestoreService:FirestoreService,
   ) { 
     
   }
@@ -60,5 +60,4 @@ export class LoginComponent implements OnInit {
   emitToggle(option:boolean){
     this.authService.hideHomeElements.next(option);
   }
-
 }

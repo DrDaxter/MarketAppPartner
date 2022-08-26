@@ -16,7 +16,7 @@ import { GetInComponent } from './get-in/get-in.component';
   declarations: [
     LoginComponent,
     SigInComponent,
-    GetInComponent
+    GetInComponent,
   ],
   imports: [
     CommonModule,

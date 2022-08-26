@@ -29,6 +29,8 @@ import {MatButtonModule} from '@angular/material/button';
 import { ProductsModule } from './pages/products/products.module';
 import {MatBadgeModule} from '@angular/material/badge';
 import { LoginModule } from './pages/login/login.module';
+import { SimpleModalComponent } from './components/simple-modal/simple-modal.component';
+import { MatDialogModule } from '@angular/material/dialog';
 //import { FirebaseStorage } from '@angular/fire/storage';
 
 @NgModule({
@@ -36,6 +38,8 @@ import { LoginModule } from './pages/login/login.module';
     AppComponent,
     HomeComponent,
     HeaderComponent,
+    SimpleModalComponent,
+    SimpleModalComponent,
   ],
   imports: [
     ProductsModule,
@@ -55,6 +59,7 @@ import { LoginModule } from './pages/login/login.module';
     MatToolbarModule,
     MatNativeDateModule,
     MatListModule,
+    MatDialogModule,
     MatButtonModule,
     MatIconModule,
     MatBadgeModule
