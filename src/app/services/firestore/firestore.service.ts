@@ -32,7 +32,10 @@ export class FirestoreService {
       this.afs.doc<T>(`${collectionName}/${item.uid}`).set(item);
       resolve(item.uid);
     });
-    
+  }
+
+  update<T>(collection: string, uid: string, document:any){
+    return this.afs.doc<T>(`${collection}/${uid}`).update(document);
   }
   
   getAll<T>(collectionName:string): Observable<T[]>{

@@ -96,7 +96,6 @@ export class ManageProductComponent implements OnInit {
   }
 
   saveProduct(productForm:any){
-    console.log(productForm);
     this.showLoader = true;
     this.products.category_uid = productForm.category.uid;
     this.products.name = productForm.name;
@@ -104,7 +103,6 @@ export class ManageProductComponent implements OnInit {
     this.products.price = productForm.price;
     this.products.commerce_uid = "cSb4yeU6BwCsGgNthPV2";
     
-    console.log(this.products)
     this.firestoreService.addElement("product",{...this.products}).then((resolve) => {
       console.log(resolve);
       if(this.selectedFile != null){
