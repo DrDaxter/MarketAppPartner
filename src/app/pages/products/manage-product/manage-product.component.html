@@ -10,7 +10,7 @@
           <mat-card-title>Product information</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <form class="example-form" [formGroup]="productsForm" (ngSubmit)="saveProduct(productsForm.value)">
+          <form class="example-form" [formGroup]="productsForm" (ngSubmit)="manageProduct(productsForm.value)">
             <div class="file-content">
               <button type="button" mat-raised-button (click)="fileInput.click()">Choose picture</button>
               <input hidden (change)="onFileSelected($event)" #fileInput type="file">

@@ -7,7 +7,7 @@ import { FirestoreService } from 'src/app/services/firestore/firestore.service';
 import { FirebaseStorageService } from 'src/app/services/forebaseStorage/firebase-storage.service';
 import {ProductsClass,categories} from '../../../models/products';
 
-interface params{queryParams: {special: string}}
+type actionOptions = {type:'edit'} | {type:'create'}
 @Component({
   selector: 'app-manage-product',
   templateUrl: './manage-product.component.html',
@@ -15,7 +15,7 @@ interface params{queryParams: {special: string}}
 })
 export class ManageProductComponent implements OnInit {
   products = new ProductsClass();
-
+  actionView?:actionOptions;
   productsForm!: FormGroup;
   pCategories:categories[] = [];
 
@@ -59,9 +59,10 @@ export class ManageProductComponent implements OnInit {
 
     this.activateRoute.queryParams.subscribe((params:any) => {
       if(params && params.special){
+        this.actionView = {type: 'edit'}
         this.loadProducts(params.special);
       }else{
-        console.log("Do nothing");
+        this.actionView = {type:'create'};
         this.loadCategories();
       }
     })
@@ -95,7 +96,7 @@ export class ManageProductComponent implements OnInit {
 
   }
 
-  saveProduct(productForm:any){
+  manageProduct(productForm:any){
     this.showLoader = true;
     this.products.category_uid = productForm.category.uid;
     this.products.name = productForm.name;
@@ -103,7 +104,21 @@ export class ManageProductComponent implements OnInit {
     this.products.price = productForm.price;
     this.products.commerce_uid = "cSb4yeU6BwCsGgNthPV2";
     
-    this.firestoreService.addElement("product",{...this.products}).then((resolve) => {
+    switch (this.actionView?.type) {
+      case 'create':
+        this.addProduct({...this.products})
+      break;
+      case 'edit':
+        this.editProduct({...this.products});
+      break;
+      default:
+        console.log("No actions passed")
+        break;
+    }
+  }
+
+  addProduct(products:ProductsClass){
+    this.firestoreService.addElement("product",{...products}).then((resolve) => {
       console.log(resolve);
       if(this.selectedFile != null){
         this.firebaseStorageService.uploadImage(this.selectedFile,resolve as string).then(res => {
@@ -117,6 +132,11 @@ export class ManageProductComponent implements OnInit {
       this.productsForm.reset();
       this.selectedFile = null;
     });
+  }
+
+  editProduct(products:ProductsClass){
+    console.log(products);
+    //this.firestoreService
   }
 
   loadCategories(): Promise<categories[]>{
@@ -148,15 +168,27 @@ export class ManageProductComponent implements OnInit {
         this.productsForm.get('name')?.setValue(this.products.name);
         this.productsForm.get('price')?.setValue(this.products.price);
         this.productsForm.get('description')?.setValue(this.products.description);
+        this.prodImgValidation(this.products.image)
         this.pCategories = await this.loadCategories();
         try{
           const category_selected = this.pCategories.filter(item => item.uid === this.products.category_uid);
           this.productsForm.get('category')?.setValue({category_name:category_selected[0].category_name});
         }catch(error){console.log(error)}
-        
       }else{
 
       }
     })
   }
+
+  prodImgValidation(imgUrl:string){
+    this.selectedFile = imgUrl
+    if(this.selectedFile){
+      const img = (<HTMLInputElement>document.getElementById("img-product"))!
+      img.src = this.selectedFile
+    }else{
+      console.log("NO IMAGE")
+      this.selectedFile = null
+    }
+  }
+
 }

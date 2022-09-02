@@ -43,7 +43,6 @@ export class FirestoreService {
     return collectionData(ref) as Observable<T[]>;
   }
   
-  
   getWhere1<T>():Observable<T[]>{
     const ref = collection(this.firestore, 'product');
     const data = query(ref, where("commerce_uid", "==", "cSb4yeU6BwCsGgNthPV2"));
