@@ -56,9 +56,11 @@ export class LoginComponent implements OnInit {
       console.log(resolve);
       this.showLoader = false;
       this.modalsService.showSimpleModal('300px',"WELCOME","See what we have for you",true,false,"Thanks!");
+      this.emitToggle(true);
       this.router.navigate(['home']);
     }).catch(error => {
       this.showLoader = false;
+      this.modalsService.showSimpleModal('300px',"Ups something went wrong","Do you have already an account?",true,false,"Ok");
       console.log(error);
     });
   }
@@ -68,7 +70,7 @@ export class LoginComponent implements OnInit {
     this.authService.registerWithEmail(data.email,data.password).then(resolve => {
       const {user} = resolve;
       this.userData = {...this.userData, email: user?.email!!,image:environment.generalAvatar, uid:user!.uid}
-      this.firestoreService.addElement('user',{...this.userData}).then(resolve2 =>{
+      this.firestoreService.addElement('user',{...this.userData}).then(() =>{
         this.showLoader = false;
         this.modalsService.showSimpleModal('300px',"User has been created","Now you have a new user :D",true,false,"Ok");
         this.sessionStorage.removeItem('isRegisterActive');
@@ -82,8 +84,4 @@ export class LoginComponent implements OnInit {
   emitToggle(option:boolean){
     this.authService.hideHomeElements.next(option);
   }
-
-  /* prueba(){
-    this.modalsService.showSimpleModal("User has been created","Now you have a new user :D",true,true,"Ok");
-  } */
 }

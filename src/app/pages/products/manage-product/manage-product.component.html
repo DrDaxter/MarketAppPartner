@@ -1,13 +1,7 @@
-<div class="content" *ngIf="view == 'edit'">
-    <mat-form-field class="example-form-field" appearance="fill">
-        <mat-label>Clearable input</mat-label>
-        <input matInput type="text">
-        <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-          <mat-icon>close</mat-icon>
-        </button>
-      </mat-form-field>
-</div>
-<div class="content" *ngIf="view == 'add'">
+<!-- <div class="content" *ngIf="view == 'edit'">
+    
+</div> -->
+<div class="content">
   <mat-spinner *ngIf="showLoader"></mat-spinner>
   <mat-grid-list cols="2" rowHeight="2:2">
     <mat-grid-tile>
@@ -55,7 +49,6 @@
               <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                 <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                   {{option.category_name}}
-                  
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>

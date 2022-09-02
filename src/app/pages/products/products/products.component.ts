@@ -32,11 +32,11 @@ export class ProductsComponent implements OnInit {
   }
 
   manageProduct(uid:string,view:string){
-    const params = {
+    /* const params = {
       productUid: uid,
       screenView: view
-    }
-    let navigationExtra:NavigationExtras = {queryParams: {special: JSON.stringify(params)}}
+    } */
+    let navigationExtra:NavigationExtras = {queryParams: {special: uid}}
     this.route.navigate(['manageProductComponent'],navigationExtra);
   }
 

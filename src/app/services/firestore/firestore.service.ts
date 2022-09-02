@@ -47,6 +47,12 @@ export class FirestoreService {
     console.log(data);
     return collectionData(data) as Observable<T[]>;
   }
+
+  getWhere2<T>(collectionName:string,key:string,value:string):Observable<T[]>{
+    const ref = collection(this.firestore, collectionName);
+    const data = query(ref, where(key, "==", value));
+    return collectionData(data) as Observable<T[]>;
+  }
   //method with new angular 
   /* return new Promise(resolve => {
       const ref = collection(this.firestore,collectionName);

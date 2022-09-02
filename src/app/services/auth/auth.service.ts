@@ -70,4 +70,14 @@ export class AuthService {
     });
   }
 
+  public logout(): Promise<boolean>{
+    return new Promise(resolve => {
+      this.afAuth.signOut().then(() =>{
+        resolve(true);
+      }).catch(error => {
+        console.log(error);
+        resolve(false);
+      })
+    })
+  }
 }

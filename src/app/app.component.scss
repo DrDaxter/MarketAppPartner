@@ -24,9 +24,8 @@ main{
 }
 
 .drawer-icon-main{
-   
     background: #1f1f1f;
-    top: 10%;
+    top: 4%;
     left: 15px;
     width: 70px !important;
     height: 85%;
@@ -77,4 +76,10 @@ p{
 
 mat-sidenav-content{
     margin-left: 0px;
+}
+
+.logoutBtn{
+    position: absolute;
+    bottom: 15px;
+    margin-left: 15px;
 }

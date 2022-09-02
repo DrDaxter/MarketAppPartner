@@ -31,6 +31,7 @@ import {MatBadgeModule} from '@angular/material/badge';
 import { LoginModule } from './pages/login/login.module';
 import { SimpleModalComponent } from './components/simple-modal/simple-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AddProductComponent } from './components/add-product/add-product.component';
 //import { FirebaseStorage } from '@angular/fire/storage';
 
 @NgModule({
@@ -40,6 +41,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     HeaderComponent,
     SimpleModalComponent,
     SimpleModalComponent,
+    AddProductComponent,
   ],
   imports: [
     ProductsModule,

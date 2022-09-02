@@ -32,6 +32,12 @@
         
       </mat-list-option>
     </mat-selection-list>
+    <button mat-icon-button class="logoutBtn"
+      (click)="sigout()">
+      <mat-icon 
+        class="icon-submenu"
+      >logout</mat-icon>
+    </button>
   </mat-sidenav>
 
   <mat-sidenav mode="side" [(opened)]="iconToggle"  *ngIf="!toggle" class="drawer-icon-main"
@@ -60,6 +66,13 @@
       </div>
       </mat-list-option>
     </mat-selection-list>
+    <button mat-icon-button class="logoutBtn"
+      (click)="sigout()">
+      <mat-icon 
+        class="icon-submenu"
+      >logout</mat-icon>
+    </button>
+    
   </mat-sidenav>
   <mat-sidenav-content [ngStyle]="{'margin-left':default_margin}">
         <mat-sidenav-container style="margin-left: 10px;margin-right: 10px;">

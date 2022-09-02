@@ -7,6 +7,7 @@ import { FirestoreService } from 'src/app/services/firestore/firestore.service';
 import { FirebaseStorageService } from 'src/app/services/forebaseStorage/firebase-storage.service';
 import {ProductsClass,categories} from '../../../models/products';
 
+interface params{queryParams: {special: string}}
 @Component({
   selector: 'app-manage-product',
   templateUrl: './manage-product.component.html',
@@ -14,6 +15,7 @@ import {ProductsClass,categories} from '../../../models/products';
 })
 export class ManageProductComponent implements OnInit {
   products = new ProductsClass();
+
   productsForm!: FormGroup;
   pCategories:categories[] = [];
 
@@ -55,16 +57,18 @@ export class ManageProductComponent implements OnInit {
       description: new FormControl("",Validators.compose([]))
     }) 
 
-    this.activateRoute.queryParams.subscribe((res:any) => {
-      if(res && res.special){
-        const data = JSON.parse(res.special);
-        this.view = data.screenView;
+    this.activateRoute.queryParams.subscribe((params:any) => {
+      if(params && params.special){
+        this.loadProducts(params.special);
+      }else{
+        console.log("Do nothing");
+        this.loadCategories();
       }
     })
   }
 
   ngOnInit(){
-    this.loadCategories();
+    
   }
 
   displayFn(category: categories): string {
@@ -117,15 +121,44 @@ export class ManageProductComponent implements OnInit {
     });
   }
 
-  loadCategories(){
-    this.firestoreService.getAll<categories>("categories").subscribe((result:categories[]) =>{
-      this.pCategories = result;
-      console.log(result);
-      this.filteredOptions = this.productsForm.valueChanges.pipe(
-        startWith(''),
-        map(value => (typeof value === 'string' ? value : value.category_name)),
-        map(name => (name ? this._filter(name) : this.pCategories.slice())),
-      );
-    });
+  loadCategories(): Promise<categories[]>{
+    return new Promise((resolve,reject) => {
+      this.firestoreService.getAll<categories>("categories").subscribe((result:categories[]) =>{
+        if(result){
+          resolve(result);
+          this.setFilter(result);
+        }else{
+          reject("No data")
+        }
+      });
+    }) 
+  }
+
+  setFilter(categories:categories[]){
+    this.pCategories = categories;
+    this.filteredOptions = this.productsForm.valueChanges.pipe(
+      startWith<string | categories>(''),
+      map(value => (typeof value === 'string' ? value : value.category_name)),
+      map(name => (name ? this._filter(name) : this.pCategories.slice())),
+    );
+  }
+
+  loadProducts(uid:string){
+    this.firestoreService.getWhere2<ProductsClass>('product','uid',uid).subscribe(async res => {
+      if(res[0]){
+        this.products = res[0];
+        this.productsForm.get('name')?.setValue(this.products.name);
+        this.productsForm.get('price')?.setValue(this.products.price);
+        this.productsForm.get('description')?.setValue(this.products.description);
+        this.pCategories = await this.loadCategories();
+        try{
+          const category_selected = this.pCategories.filter(item => item.uid === this.products.category_uid);
+          this.productsForm.get('category')?.setValue({category_name:category_selected[0].category_name});
+        }catch(error){console.log(error)}
+        
+      }else{
+
+      }
+    })
   }
 }
