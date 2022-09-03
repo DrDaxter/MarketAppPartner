@@ -70,7 +70,7 @@
               <button type="submit" mat-button
                 [disabled]="!productsForm.valid">Save</button>
 
-              <button mat-button>Cancel</button>
+              <button mat-button type="reset" (click)="goBack()">Cancel</button>
             </div>
           </form>
         </mat-card-content>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { resolve } from 'dns';
 import { map, Observable, startWith } from 'rxjs';
 import { FirestoreService } from 'src/app/services/firestore/firestore.service';
@@ -18,6 +18,7 @@ export class ManageProductComponent implements OnInit {
   actionView?:actionOptions;
   productsForm!: FormGroup;
   pCategories:categories[] = [];
+  category_selected?:categories[];
 
   filteredOptions!: Observable<categories[]>;
   value:string = "Clear me"
@@ -42,6 +43,7 @@ export class ManageProductComponent implements OnInit {
     private formBuilder: FormBuilder,
     private firestoreService:FirestoreService,
     private firebaseStorageService: FirebaseStorageService,
+    private router:Router
   ) { 
     this.productsForm = this.formBuilder.group({
       picture: new FormControl("",Validators.compose([])),
@@ -135,8 +137,17 @@ export class ManageProductComponent implements OnInit {
   }
 
   editProduct(products:ProductsClass){
-    console.log(products);
-    //this.firestoreService
+    let {category_uid} = products;
+    products.category_uid = category_uid === undefined
+      ? this.category_selected![0].uid : category_uid
+
+    this.firestoreService.update('product',products.uid,{...products}).then(res => {
+      console.log("Se edito")
+      this.showLoader = false
+    }).catch(error => {
+      this.showLoader = false
+      console.log(error)
+    })
   }
 
   loadCategories(): Promise<categories[]>{
@@ -171,8 +182,8 @@ export class ManageProductComponent implements OnInit {
         this.prodImgValidation(this.products.image)
         this.pCategories = await this.loadCategories();
         try{
-          const category_selected = this.pCategories.filter(item => item.uid === this.products.category_uid);
-          this.productsForm.get('category')?.setValue({category_name:category_selected[0].category_name});
+          this.category_selected = this.pCategories.filter(item => item.uid === this.products.category_uid);
+          this.productsForm.get('category')?.setValue({category_name:this.category_selected[0].category_name});
         }catch(error){console.log(error)}
       }else{
 
@@ -189,6 +200,10 @@ export class ManageProductComponent implements OnInit {
       console.log("NO IMAGE")
       this.selectedFile = null
     }
+  }
+
+  goBack(){
+    this.router.navigate(['product']);
   }
 
 }
