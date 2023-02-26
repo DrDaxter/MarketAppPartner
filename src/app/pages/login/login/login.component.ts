@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit {
       this.firestoreService.addElement('user',{...this.userData}).then(() =>{
         this.showLoader = false;
         this.modalsService.showSimpleModal('300px',"User has been created","Now you have a new user :D",true,false,"Ok");
-        this.sessionStorage.removeItem('isRegisterActive');
+        this.removeSessionVar()
       })
     }).catch(error => {
       this.showLoader = false;
@@ -83,5 +83,9 @@ export class LoginComponent implements OnInit {
 
   emitToggle(option:boolean){
     this.authService.hideHomeElements.next(option);
+  }
+
+  removeSessionVar(){
+    this.sessionStorage.removeItem('isRegisterActive')
   }
 }

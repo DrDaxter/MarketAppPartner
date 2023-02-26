@@ -11,14 +11,13 @@
 
     mat-grid-list{
         width: 100%;
-        height: 100%;
+        height: auto;
         background: #1f1f1f !important; 
         border-top-right-radius: 20px;
         border-bottom-right-radius: 20px;
 
         mat-grid-tile{
             background: #1f1f1f !important;
-            /* height: 100%; */
 
             .img-above{
                 position: absolute;

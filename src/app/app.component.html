@@ -1,5 +1,5 @@
 <app-header *ngIf="showNavbar"></app-header>
-<mat-sidenav-container [@.disabled]="temporaryDisabled">
+<mat-sidenav-container [@.disabled]="temporaryDisabled" style="height: 90%;">
   <mat-sidenav mode="side" [(opened)]="fullMenu" *ngIf="toggle" class="drawer-main"
     id="side1">
     <div class="button-content">
@@ -74,13 +74,11 @@
     </button>
     
   </mat-sidenav>
-  <mat-sidenav-content [ngStyle]="{'margin-left':default_margin}">
+  <mat-sidenav-content [ngStyle]="{'margin-left':default_margin}" style="height: 100%;">
         <mat-sidenav-container style="margin-left: 10px;margin-right: 10px;">
-          
           <main style="padding: 10px; height: auto;">
               <router-outlet></router-outlet> 
           </main>
-            
           </mat-sidenav-container>
   </mat-sidenav-content>
 </mat-sidenav-container>

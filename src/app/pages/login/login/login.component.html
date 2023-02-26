@@ -14,7 +14,7 @@
                     <app-sig-in (onNewUser)="registerNewUser($event)" *ngIf="getIsRegisterActive"></app-sig-in>
                     <br>
                     <h4 style="color: #fafafa;" *ngIf="!getIsRegisterActive">Don't have an acount yet? <a (click)="showRegister()">register</a></h4>
-                    <!-- <button style="background-color: red; width: 100%;" (click)="prueba()">Prueba</button> -->
+                    <h4 style="color: #fafafa;" *ngIf="getIsRegisterActive">I have an account <a (click)="removeSessionVar()">go back</a></h4>
                 </div>
             </mat-grid-tile>
         </mat-grid-list>

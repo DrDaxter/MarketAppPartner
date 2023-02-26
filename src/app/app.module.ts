@@ -32,7 +32,8 @@ import { LoginModule } from './pages/login/login.module';
 import { SimpleModalComponent } from './components/simple-modal/simple-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AddProductComponent } from './components/add-product/add-product.component';
-//import { FirebaseStorage } from '@angular/fire/storage';
+//charts
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -46,11 +47,11 @@ import { AddProductComponent } from './components/add-product/add-product.compon
   imports: [
     ProductsModule,
     LoginModule,
-    
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule.enablePersistence(),
+    NgxChartsModule,
     AngularFireAuthModule,
     BrowserModule,
     AppRoutingModule,
