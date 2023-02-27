@@ -1,0 +1,20 @@
+.mainContent{
+    background: red;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.lineal-chart-card{
+    width: 200px;
+    height: 100%;
+}
+
+.lineal-chart-card2{
+    flex-grow: 2;
+    width: auto;
+    height: 100%;
+}

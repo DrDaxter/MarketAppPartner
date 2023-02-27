@@ -1,11 +1,30 @@
-<ngx-charts-gauge
-  [view]="view"
-  [scheme]="colorScheme"
-  [results]="single"
-  [legend]="legend"
-  [legendPosition]="legendPosition"
-  (select)="onSelect($event)"
-  (activate)="onActivate($event)"
-  (deactivate)="onDeactivate($event)"
-  >
-</ngx-charts-gauge>
+<div class="mainContent">
+  <mat-card class="lineal-chart-card">
+    <mat-card-content>
+      
+    </mat-card-content>
+  </mat-card>  
+  <mat-card class="lineal-chart-card">
+    <mat-card-content>
+     
+    </mat-card-content>
+  </mat-card> 
+  <mat-card class="lineal-chart-card2">
+    <mat-card-content>
+      <ngx-charts-bar-vertical
+        [view]="[700,400]"
+        [scheme]="colorScheme"
+        [results]="single"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        (select)="onSelect($event)">
+      </ngx-charts-bar-vertical>
+    </mat-card-content>
+  </mat-card>  
+</div>

@@ -20,14 +20,16 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { MatSliderModule } from '@angular/material/slider';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import { HeaderComponent } from './components/header/header.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-import { ProductsModule } from './pages/products/products.module';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatCardModule} from '@angular/material/card';
+
+import { HeaderComponent } from './components/header/header.component';
+import { ProductsModule } from './pages/products/products.module';
 import { LoginModule } from './pages/login/login.module';
 import { SimpleModalComponent } from './components/simple-modal/simple-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -65,7 +67,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     MatDialogModule,
     MatButtonModule,
     MatIconModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatCardModule
   ],
   providers: [
     { provide: SESSION_GENERAL_STORAGE, useExisting: SESSION_STORAGE },
