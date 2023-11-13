@@ -1,20 +1,27 @@
 .mainContent{
-    background: red;
     width: 100%;
     height: auto;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     flex-wrap: wrap;
 }
 
 .lineal-chart-card{
-    width: 200px;
-    height: 100%;
+    width: 300px;
+    height: 100px;
+    margin-bottom: 5px;
 }
 
 .lineal-chart-card2{
     flex-grow: 2;
     width: auto;
     height: 100%;
+}
+
+.chart-content{
+    margin-right: auto;
+    margin-left: auto;
+    height: 400px;
+    width: 70%;
 }

@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { resolve } from 'dns';
 import { map, Observable, startWith } from 'rxjs';
 import { FirestoreService } from 'src/app/services/firestore/firestore.service';
 import { FirebaseStorageService } from 'src/app/services/forebaseStorage/firebase-storage.service';
 import {ProductsClass,categories} from '../../../models/products';
+import { Products } from 'src/app/interfaces/poduct/ProductInterface';
 
-type actionOptions = {type:'edit'} | {type:'create'}
+enum ActionOptions {
+  EDIT = 'edit',
+  CREATE = 'create'
+}
 @Component({
   selector: 'app-manage-product',
   templateUrl: './manage-product.component.html',
@@ -15,7 +18,7 @@ type actionOptions = {type:'edit'} | {type:'create'}
 })
 export class ManageProductComponent implements OnInit {
   products = new ProductsClass();
-  actionView?:actionOptions;
+  actionView?:ActionOptions;
   productsForm!: FormGroup;
   pCategories:categories[] = [];
   category_selected?:categories[];
@@ -24,6 +27,7 @@ export class ManageProductComponent implements OnInit {
   value:string = "Clear me"
   view:string = "";
   productUid:string = "";
+  imagPath: string = ''
   selectedFile:any = null;
   showLoader:boolean = false;
   validationMessage = {
@@ -44,7 +48,7 @@ export class ManageProductComponent implements OnInit {
     private firestoreService:FirestoreService,
     private firebaseStorageService: FirebaseStorageService,
     private router:Router
-  ) { 
+  ) {
     this.productsForm = this.formBuilder.group({
       picture: new FormControl("",Validators.compose([])),
       name: new FormControl("",Validators.compose([
@@ -57,21 +61,21 @@ export class ManageProductComponent implements OnInit {
         Validators.required
       ])),
       description: new FormControl("",Validators.compose([]))
-    }) 
+    })
 
     this.activateRoute.queryParams.subscribe((params:any) => {
       if(params && params.special){
-        this.actionView = {type: 'edit'}
+        this.actionView = ActionOptions.EDIT;
         this.loadProducts(params.special);
       }else{
-        this.actionView = {type:'create'};
+        this.actionView = ActionOptions.CREATE;
         this.loadCategories();
       }
     })
   }
 
   ngOnInit(){
-    
+
   }
 
   displayFn(category: categories): string {
@@ -92,7 +96,7 @@ export class ManageProductComponent implements OnInit {
     }else{
       const img = (<HTMLInputElement>document.getElementById("img-product"))!;
       const objectURL = URL.createObjectURL(this.selectedFile);
-  
+
       img.src = objectURL;
     }
 
@@ -105,12 +109,12 @@ export class ManageProductComponent implements OnInit {
     this.products.description = productForm.description;
     this.products.price = productForm.price;
     this.products.commerce_uid = "cSb4yeU6BwCsGgNthPV2";
-    
-    switch (this.actionView?.type) {
-      case 'create':
+
+    switch (this.actionView) {
+      case ActionOptions.CREATE:
         this.addProduct({...this.products})
       break;
-      case 'edit':
+      case ActionOptions.EDIT:
         this.editProduct({...this.products});
       break;
       default:
@@ -119,21 +123,26 @@ export class ManageProductComponent implements OnInit {
     }
   }
 
-  addProduct(products:ProductsClass){
-    this.firestoreService.addElement("product",{...products}).then((resolve) => {
-      console.log(resolve);
-      if(this.selectedFile != null){
-        this.firebaseStorageService.uploadImage(this.selectedFile,resolve as string).then(res => {
-          this.showLoader = false;
-          console.log(res);
-        });
-      }else{
-        console.log("No picture");
-        this.showLoader = false; 
-      }
-      this.productsForm.reset();
-      this.selectedFile = null;
-    });
+  async addProduct(products:Products){
+    const fireId = this.firestoreService.manualId();
+    const imgPath = await this.setImgProduct(fireId);
+    const productData:Products = {
+      ...products,
+      image: imgPath
+    }
+    await this.firestoreService.addDocument("product", productData,fireId)
+    this.showLoader = false
+    this.productsForm.reset();
+    this.selectedFile = null;
+
+  }
+
+  async setImgProduct(prodId:string):Promise<string|null>{
+    if(this.selectedFile != null){
+      const uploadResult = await this.firebaseStorageService.uploadImage(this.selectedFile,prodId);
+      return uploadResult.metadata.fullPath;
+    }
+    return null;
   }
 
   editProduct(products:ProductsClass){
@@ -160,7 +169,7 @@ export class ManageProductComponent implements OnInit {
           reject("No data")
         }
       });
-    }) 
+    })
   }
 
   setFilter(categories:categories[]){

@@ -11,20 +11,23 @@
   </mat-card> 
   <mat-card class="lineal-chart-card2">
     <mat-card-content>
-      <ngx-charts-bar-vertical
-        [view]="[700,400]"
-        [scheme]="colorScheme"
-        [results]="single"
-        [gradient]="gradient"
-        [xAxis]="showXAxis"
-        [yAxis]="showYAxis"
-        [legend]="showLegend"
-        [showXAxisLabel]="showXAxisLabel"
-        [showYAxisLabel]="showYAxisLabel"
-        [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel"
-        (select)="onSelect($event)">
-      </ngx-charts-bar-vertical>
+      <div class="chart-content">
+        <ngx-charts-bar-vertical
+          [view]="[700,400]"
+          [scheme]="colorScheme"
+          [results]="single"
+          [gradient]="gradient"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [legendPosition]="legendPosition"
+          [legend]="showLegend"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel"
+          (select)="onSelect($event)">
+        </ngx-charts-bar-vertical>
+      </div>
     </mat-card-content>
   </mat-card>  
 </div>

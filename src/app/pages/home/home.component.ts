@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth/auth.service';
-import { FirestoreService } from 'src/app/services/firestore/firestore.service';
 import { single } from '../../utils/ExampleData';
 import { Color, LegendPosition, ScaleType } from '@swimlane/ngx-charts';
 
@@ -14,12 +12,12 @@ export class HomeComponent {
   single: any[] = [];
   view:[number,number] = [500, 100];
 
-  legendPosition = LegendPosition.Below;
+  legendPosition = LegendPosition.Right;
 
   // options
   showXAxis = true;
   showYAxis = true;
-  gradient = false;
+  gradient = true;
   showLegend = true;
   showXAxisLabel = true;
   xAxisLabel = 'Country';
@@ -27,7 +25,7 @@ export class HomeComponent {
   yAxisLabel = 'Population';
 
   colorScheme:Color = {
-    name: 'myScheme',
+    name: 'cool',
     selectable: true,
     group: ScaleType.Ordinal,
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'],
