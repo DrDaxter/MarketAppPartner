@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { SignUpInterface } from 'src/app/interfaces/signupInterface';
 
 @Component({
@@ -8,7 +8,7 @@ import { SignUpInterface } from 'src/app/interfaces/signupInterface';
   styleUrls: ['./get-in.component.scss']
 })
 export class GetInComponent implements OnInit {
-  loginForm!:FormGroup;
+  loginForm!:UntypedFormGroup;
   @Output() onLoginUser:EventEmitter<SignUpInterface> = new EventEmitter();
   validationMessage = {
     password: [
@@ -21,14 +21,14 @@ export class GetInComponent implements OnInit {
     ],
   };
   constructor(
-    private formBuilder:FormBuilder,
+    private formBuilder:UntypedFormBuilder,
   ) { 
     this.loginForm = this.formBuilder.group({
-      password: new FormControl("",Validators.compose([
+      password: new UntypedFormControl("",Validators.compose([
         Validators.required,
         Validators.minLength(6)
       ])),
-      email: new FormControl("",Validators.compose([
+      email: new UntypedFormControl("",Validators.compose([
         Validators.required,
         Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$")
       ]))

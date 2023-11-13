@@ -1,5 +1,5 @@
 import { Component, OnInit,Output,EventEmitter} from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { SignUpInterface } from 'src/app/interfaces/signupInterface';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
   styleUrls: ['./sig-in.component.scss']
 })
 export class SigInComponent implements OnInit {
-  signForm!:FormGroup;
+  signForm!:UntypedFormGroup;
   @Output() onNewUser:EventEmitter<SignUpInterface> = new EventEmitter();
   validationMessage = {
     password: [
@@ -25,17 +25,17 @@ export class SigInComponent implements OnInit {
     ],
   };
   constructor(
-    private formBuilder:FormBuilder,
+    private formBuilder:UntypedFormBuilder,
   ) { 
     this.signForm = this.formBuilder.group({
-        password: new FormControl("",Validators.compose([
+        password: new UntypedFormControl("",Validators.compose([
           Validators.required,
           Validators.minLength(6)
         ])),
-        confirmPassword: new FormControl("", Validators.compose([
+        confirmPassword: new UntypedFormControl("", Validators.compose([
           Validators.required,
         ])),
-        email: new FormControl("", Validators.compose([
+        email: new UntypedFormControl("", Validators.compose([
           Validators.required,
           Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$")
         ]))

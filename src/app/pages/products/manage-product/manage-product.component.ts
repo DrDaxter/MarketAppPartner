@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, Observable, startWith } from 'rxjs';
 import { FirestoreService } from 'src/app/services/firestore/firestore.service';
@@ -19,7 +19,7 @@ enum ActionOptions {
 export class ManageProductComponent implements OnInit {
   products = new ProductsClass();
   actionView?:ActionOptions;
-  productsForm!: FormGroup;
+  productsForm!: UntypedFormGroup;
   pCategories:categories[] = [];
   category_selected?:categories[];
 
@@ -44,23 +44,23 @@ export class ManageProductComponent implements OnInit {
 
   constructor(
     private activateRoute: ActivatedRoute,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private firestoreService:FirestoreService,
     private firebaseStorageService: FirebaseStorageService,
     private router:Router
   ) {
     this.productsForm = this.formBuilder.group({
-      picture: new FormControl("",Validators.compose([])),
-      name: new FormControl("",Validators.compose([
+      picture: new UntypedFormControl("",Validators.compose([])),
+      name: new UntypedFormControl("",Validators.compose([
         Validators.required
       ])),
-      category: new FormControl("",Validators.compose([
+      category: new UntypedFormControl("",Validators.compose([
         Validators.required
       ])),
-      price: new FormControl("",Validators.compose([
+      price: new UntypedFormControl("",Validators.compose([
         Validators.required
       ])),
-      description: new FormControl("",Validators.compose([]))
+      description: new UntypedFormControl("",Validators.compose([]))
     })
 
     this.activateRoute.queryParams.subscribe((params:any) => {
