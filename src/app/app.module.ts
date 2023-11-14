@@ -36,6 +36,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AddProductComponent } from './components/add-product/add-product.component';
 //charts
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideStorage,getStorage } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
@@ -68,7 +70,9 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     MatButtonModule,
     MatIconModule,
     MatBadgeModule,
-    MatCardModule
+    MatCardModule,
+    provideAuth(() => getAuth()),
+    provideStorage(() => getStorage())
   ],
   providers: [
     { provide: SESSION_GENERAL_STORAGE, useExisting: SESSION_STORAGE },
