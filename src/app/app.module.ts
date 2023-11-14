@@ -10,12 +10,12 @@ import { HomeComponent } from './pages/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //angular fire
 import { environment } from 'src/environments/environment';
-import { provideFirebaseApp, initializeApp} from '@angular/fire/app';
-import { getFirestore,provideFirestore } from '@angular/fire/firestore'
+/* import { provideFirebaseApp, initializeApp} from '@angular/fire/app';
+import { getFirestore,provideFirestore } from '@angular/fire/firestore' */
 
-import {AngularFireModule,} from '@angular/fire/compat';
+/* import {AngularFireModule,} from '@angular/fire/compat';
 import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth'; */
 //material component
 import { MatSliderModule } from '@angular/material/slider';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -36,8 +36,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AddProductComponent } from './components/add-product/add-product.component';
 //charts
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { provideAuth,getAuth } from '@angular/fire/auth';
-import { provideStorage,getStorage } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
@@ -51,12 +49,12 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
   imports: [
     ProductsModule,
     LoginModule,
-    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
-    provideFirestore(() => getFirestore()),
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule.enablePersistence(),
+   /*  provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideFirestore(() => getFirestore()), */
+    /* AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule.enablePersistence(), */
     NgxChartsModule,
-    AngularFireAuthModule,
+    //AngularFireAuthModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -70,9 +68,7 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
     MatButtonModule,
     MatIconModule,
     MatBadgeModule,
-    MatCardModule,
-    provideAuth(() => getAuth()),
-    provideStorage(() => getStorage())
+    MatCardModule
   ],
   providers: [
     { provide: SESSION_GENERAL_STORAGE, useExisting: SESSION_STORAGE },
